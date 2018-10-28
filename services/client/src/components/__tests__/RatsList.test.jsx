@@ -5,13 +5,13 @@ import RatsList from '../RatsList';
 
 const rats = [
   {
-    'active': true,
+    'alive': true,
     'color': 'white',
     'id': 1,
     'weight': 200
   },
   {
-    'active': true,
+    'alive': true,
     'color': 'black',
     'id': 2,
     'weight': 300

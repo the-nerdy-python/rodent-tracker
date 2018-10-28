@@ -12,7 +12,8 @@ def index():
     if request.method == 'POST':
         color = request.form['color']
         weight = request.form['weight']
-        db.session.add(Rat(color=color, weight=weight))
+        alive = request.form['alive']
+        db.session.add(Rat(color=color, weight=weight, alive=alive))
         db.session.commit()
     rats = Rat.query.all()
     return render_template('index.html', rats=rats)
@@ -37,8 +38,9 @@ def add_rat():
         return jsonify(response_object), 400
     color = post_data.get('color')
     weight = post_data.get('weight')
+    alive = post_data.get('alive')
     try:
-        db.session.add(Rat(color=color, weight=weight))
+        db.session.add(Rat(color=color, weight=weight, alive=alive))
         db.session.commit()
         response_object['status'] = 'success'
         response_object['message'] = f'{color} was added!'
@@ -78,7 +80,7 @@ def get_single_rat(rat_id):
                     'id': rat.id,
                     'color': rat.color,
                     'weight': rat.weight,
-                    'active': rat.active
+                    'alive': rat.alive
                 }
             }
             return jsonify(response_object), 200

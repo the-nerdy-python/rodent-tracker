@@ -36,8 +36,8 @@ def test():
 @cli.command()
 def seed_db():
     """Seeds the database."""
-    db.session.add(Rat(color='white', weight=200))
-    db.session.add(Rat(color='black', weight=300))
+    db.session.add(Rat(color='white', weight=200, alive=True))
+    db.session.add(Rat(color='black', weight=300, alive=True))
     db.session.commit()
 
 @cli.command()

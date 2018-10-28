@@ -10,6 +10,7 @@ test('AddRat renders properly', () => {
   expect(element.find('input').length).toBe(3);
   expect(element.find('input').get(0).props.name).toBe('color');
   expect(element.find('input').get(1).props.name).toBe('weight');
+  expect(element.find('input').get(1).props.name).toBe('alive');
   expect(element.find('input').get(2).props.type).toBe('submit');
 });
 

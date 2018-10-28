@@ -11,6 +11,7 @@ class App extends Component {
         rats: [],
         color: '',
         weight: '',
+        alive: true
     };
     this.addRat = this.addRat.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -29,12 +30,13 @@ class App extends Component {
     event.preventDefault();
     const data = {
       color: this.state.color,
-      weight: this.state.weight
+      weight: this.state.weight,
+      alive: this.state.alive
     };
     axios.post(`${process.env.REACT_APP_RATS_SERVICE_URL}/rats`, data)
     .then((res) => {
       this.getRats();
-      this.setState({ color: '', weight: '' });
+      this.setState({ color: '', weight: '' , alive: true});
     })
     .catch((err) => { console.log(err); });
   };
@@ -59,6 +61,7 @@ class App extends Component {
               <AddRat
                 color={this.state.color}
                 weight={this.state.weight}
+                alive={this.state.alive}
                 addRat={this.addRat}
                 handleChange={this.handleChange}
               />
