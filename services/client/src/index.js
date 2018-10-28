@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RatsList from './components/RatsList';
+import AddRat from './components/AddRat';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-        rats: []
-    }
+        rats: [],
+        color: '',
+        weight: '',
+    };
+    this.addRat = this.addRat.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   };
   componentDidMount() {
       this.getRats();
@@ -20,6 +25,28 @@ class App extends Component {
     .catch((err) => { console.log(err); });
   }
 
+  addRat(event) {
+    event.preventDefault();
+    const data = {
+      color: this.state.color,
+      weight: this.state.weight
+    };
+    axios.post(`${process.env.REACT_APP_RATS_SERVICE_URL}/rats`, data)
+    .then((res) => {
+      this.getRats();
+      this.setState({ color: '', weight: '' });
+    })
+    .catch((err) => { console.log(err); });
+  };
+
+
+  handleChange(event) {
+    const obj = {};
+    obj[event.target.name] = event.target.value;
+    this.setState(obj);
+  };
+
+
   render() {
     return (
       <section className="section">
@@ -29,6 +56,13 @@ class App extends Component {
               <br/>
               <h1 className="title is-1">All Rats</h1>
               <hr/><br/>
+              <AddRat
+                color={this.state.color}
+                weight={this.state.weight}
+                addRat={this.addRat}
+                handleChange={this.handleChange}
+              />
+              <br></br>
               <RatsList rats={this.state.rats}/>
             </div>
           </div>
