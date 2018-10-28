@@ -1,6 +1,5 @@
-from sqlalchemy.sql import func
-
 from project import db
+
 
 class Rat(db.Model):
     __tablename__ = 'rats'

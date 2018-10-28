@@ -4,6 +4,7 @@ from project import db
 from project.api.models import Rat
 from project.tests.base import BaseTestCase
 
+
 def add_rat(color, weight):
     rat = Rat(color=color, weight=weight)
     db.session.add(rat)
@@ -145,8 +146,6 @@ class TestRatsService(BaseTestCase):
             self.assertIn(b'All Rats', response.data)
             self.assertNotIn(b'<p>No rats!</p>', response.data)
             self.assertIn(b'white', response.data)
-
-
 
 
 if __name__ == '__main__':

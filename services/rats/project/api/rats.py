@@ -6,6 +6,7 @@ from sqlalchemy import exc
 
 rats_blueprint = Blueprint('rats', __name__, template_folder='./templates')
 
+
 @rats_blueprint.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -17,13 +18,13 @@ def index():
     return render_template('index.html', rats=rats)
 
 
-
 @rats_blueprint.route('/rats/ping', methods=['GET'])
 def ping_pong():
     return jsonify({
         'status': 'success',
         'message': 'pong!'
     })
+
 
 @rats_blueprint.route('/rats', methods=['POST'])
 def add_rat():
@@ -45,6 +46,7 @@ def add_rat():
     except exc.IntegrityError as e:
         db.session.rollback()
         return jsonify(response_object), 400
+
 
 @rats_blueprint.route('/rats', methods=['GET'])
 def get_all_rats():
@@ -82,4 +84,3 @@ def get_single_rat(rat_id):
             return jsonify(response_object), 200
     except ValueError:
         return jsonify(response_object), 404
-
