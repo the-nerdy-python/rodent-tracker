@@ -21,6 +21,14 @@ def test():
         return 0
     return 1
 
+@cli.command()
+def seed_db():
+    """Seeds the database."""
+    db.session.add(Rat(color='white', weight=200))
+    db.session.add(Rat(color='black', weight=300))
+    db.session.commit()
+
+
 
 if __name__ == '__main__':
     cli()

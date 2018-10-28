@@ -12,3 +12,11 @@ class Rat(db.Model):
     def __init__(self, color, weight):
         self.color = color
         self.weight = weight
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'color': self.color,
+            'weight': self.weight,
+            'active': self.active
+        }
