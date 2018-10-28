@@ -17,11 +17,11 @@ Local rodent tracking solution
 
 ### Create the database:
 
-`docker-compose -f docker-compose-dev.yml run rats python manage.py recreate_db`
+`docker-compose -f docker-compose-dev.yml run rats python manage.py recreate-db`
 
 ### Seed the database:
 
-`docker-compose -f docker-compose-dev.yml run rats python manage.py seed_db`
+`docker-compose -f docker-compose-dev.yml run rats python manage.py seed-db`
 
 ### Run the tests:
 
