@@ -1,7 +1,7 @@
 # rodent-tracker
 Local rodent tracking solution
 
-[![Build Status](https://travis-ci.com/the-nerdy-python/rodent-tracker.svg?branch=master)]
+[Build Status](https://travis-ci.com/the-nerdy-python/rodent-tracker.svg?branch=master)
 
 ## Common Commands
 
