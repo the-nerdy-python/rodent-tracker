@@ -1,0 +1,3 @@
+CREATE DATABASE rats_prod;
+CREATE DATABASE rats_dev;
+CREATE DATABASE rats_test;
