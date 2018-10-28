@@ -112,6 +112,40 @@ class TestRatsService(BaseTestCase):
                 200, data['data']['rats'][1]['weight'])
             self.assertIn('success', data['status'])
 
+    def test_main_no_rats(self):
+        """Ensure the main route behaves correctly when no rats have been
+        added to the database."""
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'All Rats', response.data)
+        self.assertIn(b'<p>No rats!</p>', response.data)
+
+    def test_main_with_rats(self):
+        """Ensure the main route behaves correctly when rats have been
+        added to the database."""
+        add_rat('brown', 100)
+        add_rat('black', 200)
+        with self.client:
+            response = self.client.get('/')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'All Rats', response.data)
+            self.assertNotIn(b'<p>No rats!</p>', response.data)
+            self.assertIn(b'brown', response.data)
+            self.assertIn(b'black', response.data)
+
+    def test_main_add_user(self):
+        """Ensure a new rat can be added to the database."""
+        with self.client:
+            response = self.client.post(
+                '/',
+                data=dict(color='white', weight=300),
+                follow_redirects=True
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'All Rats', response.data)
+            self.assertNotIn(b'<p>No rats!</p>', response.data)
+            self.assertIn(b'white', response.data)
+
 
 
 

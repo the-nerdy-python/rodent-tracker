@@ -1,10 +1,21 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template
 
 from project.api.models import Rat
 from project import db
 from sqlalchemy import exc
 
-rats_blueprint = Blueprint('rats', __name__)
+rats_blueprint = Blueprint('rats', __name__, template_folder='./templates')
+
+@rats_blueprint.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        color = request.form['color']
+        weight = request.form['weight']
+        db.session.add(Rat(color=color, weight=weight))
+        db.session.commit()
+    rats = Rat.query.all()
+    return render_template('index.html', rats=rats)
+
 
 
 @rats_blueprint.route('/rats/ping', methods=['GET'])
