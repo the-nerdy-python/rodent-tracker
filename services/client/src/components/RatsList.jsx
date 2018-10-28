@@ -10,8 +10,6 @@ const RatsList = (props) => {
               key={rat.id}
               className="box title is-4"
             >{ rat.color }
-            <br />
-             { rat.weight } grams
             </h4>
           )
         })
