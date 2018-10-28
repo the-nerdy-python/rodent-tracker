@@ -24,4 +24,4 @@ after_script:
   - docker-compose -f docker-compose-dev.yml down
 
 after_success:
-  coveralls
+  - docker-compose -f docker-compose-dev.yml run rats coveralls
